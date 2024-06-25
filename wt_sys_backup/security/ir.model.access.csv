@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_recreate_sys_backup_backup,recreate_sys_backup.backup,model_recreate_sys_backup_backup,base.group_user,1,1,1,1
+access_recreate_sys_backup_record,recreate_sys_backup.record,model_recreate_sys_backup_record,base.group_user,1,1,1,1
+
