@@ -1,0 +1,75 @@
+<odoo>
+  <data>
+    <record id="view_recreate_sys_backup_form" model="ir.ui.view">
+      <field name="name">recreate_sys_backup.backup.form</field>
+      <field name="model">recreate_sys_backup.backup</field>
+      <field name="arch" type="xml">
+        <form string="Account">
+          <header>
+            <button name="run_manually" type="object" string="Run Manually" class="oe_highlight" />
+          </header>
+          <sheet>
+            <group>
+              <group>
+                <field name="name" />
+                <field name="start_date" />
+                <field name="domain_main" />
+                <field name="domain" />
+                <field name="db_name" />
+                <field name="db_master_password" password="True" />
+                <field name="state" />
+                <field name="keep_days" />
+                <field name="description" />
+              </group>
+            </group>
+            <notebook>
+              <page string="Backup Lines" name="backup_line">
+                <field name="backup_line" mode="tree">
+                  <tree string="Backup Lines">
+                    <field name="sequence" widget="handle" />
+                    <field name="name" />
+                    <field name="back_date" />
+                    <field name="db_path" />
+                    <field name="db_size" />
+                    <field name="is_success" />
+                    <field name="status" />
+                    <button string="" name="action_download_db" type="object" icon="fa-download" attrs="{'invisible': [('is_success', '=', False)]}" />
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="recreate_sys_backup_list">
+      <field name="name">Backup list</field>
+      <field name="model">recreate_sys_backup.backup</field>
+      <field name="arch" type="xml">
+        <tree multi_edit="1">
+          <field name="write_date" string="Latest Backup" />
+          <field name="name" />
+          <field name="state" />
+          <field name="keep_days" />
+          <field name="db_name" />
+          <field name="domain_main" optional="show" />
+          <field name="domain" optional="show" />
+          <field name="description" optional="show" />
+          <field name="start_date" optional="show" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="recreate_sys_backup_action_window">
+      <field name="name">Clients</field>
+      <field name="res_model">recreate_sys_backup.backup</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Back up" id="recreate_sys_backup_menu_root" web_icon="recreate_sys_backup,static/description/icon.png" />
+    <menuitem name="Clients" id="recreate_sys_backup_menu_1" parent="recreate_sys_backup_menu_root" />
+    <menuitem name="Configuration" id="recreate_sys_backup_menu_2" parent="recreate_sys_backup_menu_root" />
+    <menuitem name="List" id="recreate_sys_backup_menu_1_list" parent="recreate_sys_backup_menu_1" action="recreate_sys_backup_action_window" />
+  </data>
+</odoo>
